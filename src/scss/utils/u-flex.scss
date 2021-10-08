@@ -1,0 +1,22 @@
+$b: '.u-flex';
+
+#{$b} {
+  &-center {
+    @include center-flex();
+  }
+
+  &-justify {
+    &-center {
+      justify-content: center;
+    }
+  }
+
+  &-none {
+    flex: 0 0 auto;
+  }
+
+  &-fluid {
+    flex: 1 1 auto;
+    width: 1px;
+  }
+}

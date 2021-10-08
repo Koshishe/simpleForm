@@ -1,0 +1,36 @@
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.2s ease-out;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.slide-toggle {
+  &-enter-active,
+  &-leave-active {
+    will-change: height;
+  }
+
+  &-enter,
+  &-leave-to {
+    height: 0 !important;
+  }
+}
+
+.zoom-fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.3s ease-out;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}

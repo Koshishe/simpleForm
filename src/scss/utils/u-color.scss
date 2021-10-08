@@ -1,0 +1,11 @@
+$b: '.u-color';
+
+#{$b} {
+  &-accent {
+    color: $accent-base;
+  }
+
+  &-inherit {
+    color: inherit;
+  }
+}

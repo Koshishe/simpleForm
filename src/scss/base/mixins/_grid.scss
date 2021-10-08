@@ -1,0 +1,60 @@
+@mixin columnWidth($cols, $max-cols, $left-gutter: 0, $right-gutter: $left-gutter) {
+  $width: $cols * (100% / $max-cols);
+
+  @if (
+    ($left-gutter == 0 and $right-gutter == 0) or
+    ($left-gutter == 0% and $right-gutter == 0%) or
+    ($left-gutter == 0 and $right-gutter == 0)
+  ) {
+    width: $width;
+  }
+
+  @else {
+    width: calc(#{$width} - #{$left-gutter} - #{$right-gutter});
+  }
+}
+
+// @include column(1, 3, 0px, rem(15px))
+// @include column(917, 1920, 0px, 120px) (реальная ширина колонки = 797px; 797px + 120px отступ = 917px)
+
+@mixin column($cols, $max-cols, $left-gutter: 0, $right-gutter: $left-gutter) {
+  flex: 0 0 auto;
+
+  @include columnWidth($cols, $max-cols, $left-gutter, $right-gutter);
+  margin-left: #{$left-gutter};
+  margin-right: #{$right-gutter};
+}
+
+//.item {
+//  @include tablet-only {
+//    @include columns-nth(3, 20px);
+//  }
+//}
+@mixin columns-nth($columns, $gutter) {
+  $width: 100% / $columns;
+  width: calc(#{$width} - #{($gutter * ($columns - 1)) / $columns});
+  margin-right: $gutter;
+
+  &:nth-child(#{$columns}n) {
+    margin-right: 0;
+  }
+}
+
+//$selector is a string:
+//.item {
+//  @include tablet-only {
+//    @include columns-nth(3, 20px);
+//    margin-bottom: 20px;
+//
+//    @include last-row('&', 3) {
+//      margin-bottom: 0;
+//    }
+//  }
+//}
+@mixin last-row($selector, $cols-number) {
+  $selector: $selector + unquote("");
+  #{$selector}:nth-child(#{$cols-number}n+1):nth-last-child(-n+#{$cols-number}),
+  #{$selector}:nth-child(#{$cols-number}n+1):nth-last-child(-n+#{$cols-number}) ~ #{$selector} {
+    @content;
+  }
+}

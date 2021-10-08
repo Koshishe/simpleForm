@@ -1,0 +1,39 @@
+{% from "components/example.twig" import example %}
+
+{% includeData 'foo.json' as foo %}
+
+{# COMPONENT / LOOP #}
+{% for item in exampleItems %}
+    {{
+        example({
+            title: item.title,
+            text: item.text
+        })
+    }}
+{% endfor %}
+
+{# RANGE LOOP #}
+{% for num in range(0, 5) -%}
+    <span>{{ num }} ({{ loop.index }}/{{ loop.length }}) {% if not loop.last %}, {% endif %}</span>
+{%- endfor %}
+
+{# INLINE SVG #}
+<div style="width: 260px;">
+    {{ inc.inlineSvg('logo', '../img/icons/logo.svg') }}
+</div>
+
+{# LAZYLOAD #}
+{# img #}
+<img class="js-lazy-img" src="{{ inc.pixel }}" data-src="img/features/1.jpg" alt="">
+
+{# video #}
+<video class="js-lazy-video" muted autoplay playsinline loop>
+    <source data-src="videos/features/1.mp4" type="video/mp4">
+</video>
+
+{# bg #}
+<section class="section">
+    <div class="js-lazy-bg section__bg _g-hidden-tablet" data-background-image="img/hero-bg.jpg"></div>
+    <div class="js-lazy-bg section__bg _g-visible-tablet _g-hidden-mobile" data-background-image="img/hero-bg--tablet.jpg"></div>
+    <div class="js-lazy-bg section__bg _g-visible-mobile" data-background-image="img/hero-bg--mobile.jpg"></div>
+</section>

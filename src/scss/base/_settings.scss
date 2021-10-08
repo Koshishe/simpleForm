@@ -1,0 +1,52 @@
+// Size
+$outer-w: 1400px;
+$inner-pd: 120px;
+$inner-pd-ld: 40px;
+$inner-pd-tab: 25px;
+$inner-pd-mob: 15px;
+
+// Colors
+$black-true: #000;
+$white-true: #fff;
+
+// UI Colors
+$color-base: $white-true;
+$accent-base: #1a8cff;
+$action-base: #f42f3e;
+$text-base: #3b4256;
+$border-base: #e6ecf2;
+$link-base: #1964b1;
+$shadow-base: #004484;
+$site-preloader-inner: $accent-base;
+$site-preloader-bg: $white-true;
+
+// Backgrounds
+$bg-main: $white-true;
+$bg-alt: #f0f0f0;
+$bg-footer: #ccc;
+
+// Fonts
+$font-base: 'Arial';
+$font-alt: 'Meta';
+$font-size: 16px;
+$line-height: 1.33;
+$font-family-base: $font-base, arial, helvetica, sans-serif;
+$font-family-alt: $font-alt, arial, helvetica, sans-serif;
+
+// Transition
+$g-transition-duration: 0.25s;
+$g-transition-easing: ease-out;
+$g-transition: all $g-transition-duration $g-transition-easing;
+$transition-easing-alt: cubic-bezier(0.77, 0, 0.19, 1);
+
+// Screen sizes
+$wide-desktop-width: 1600px;
+$desktop-width: 1340px;
+$low-desktop-width: 1024px;
+$tablet-width: 768px;
+
+// Rem
+$root-font-size: 100;
+
+// Paths
+$image-path: '../img/';

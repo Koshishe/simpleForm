@@ -1,0 +1,42 @@
+$b: '.g';
+
+html {
+  font-size: #{$root-font-size}px;
+}
+
+body {
+  position: relative;
+  min-width: 320px;
+  height: 100%;
+  font-family: $font-family-base;
+  font-size: $font-size;
+  font-weight: normal;
+  line-height: $line-height;
+  color: $text-base;
+  background: $bg-main;
+  text-rendering: geometricPrecision;
+}
+
+a {
+  transition: $g-transition;
+}
+
+#{$b}-font-alt {
+  font-family: $font-alt;
+}
+
+#{$b}-alt-bg {
+  background-color: $bg-alt;
+}
+
+#{$b}-tab {
+  &._active {
+    cursor: default;
+  }
+  
+  &-content {
+    &:not(._active) {
+      display: none;
+    }
+  }
+}

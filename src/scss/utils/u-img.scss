@@ -1,0 +1,11 @@
+$b: '.u-img';
+
+#{$b} {
+  &-full {
+    @include img-full();
+  }
+
+  &-responsive {
+    @include img-responsive();
+  }
+}

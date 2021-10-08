@@ -1,0 +1,19 @@
+$b: '.u-d';
+
+#{$b} {
+  &-flex {
+    display: flex;
+  }
+
+  &-inline-flex {
+    display: inline-flex;
+  }
+
+  &-block {
+    display: block;
+  }
+
+  &-none {
+    display: none;
+  }
+}

@@ -1,0 +1,30 @@
+@use 'sass:math';
+
+@function divide($x, $y) {
+  @return math.div($x, $y);
+}
+
+@function img-url($image) {
+  @return url('#{$image-path}#{$image}');
+}
+
+// Remove the unit of a length
+// @param {Number} $number - Number to remove unit from
+// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+$browser-context: $root-font-size;
+
+@function em($pixels, $context: $browser-context) {
+  @return strip-unit($pixels) / strip-unit($context) * 1em;
+}
+
+@function rem($pixels, $context: $browser-context) {
+  @return strip-unit($pixels) / strip-unit($context) * 1rem;
+}

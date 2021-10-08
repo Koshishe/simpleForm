@@ -1,0 +1,27 @@
+$b: '.u-bg';
+
+#{$b} {
+  &-cover {
+    @include bg-cover();
+  }
+
+  &-decor {
+    @include bg-decor();
+  }
+
+  &-contain {
+    @include bg-contain();
+  }
+
+  &-main {
+    background-color: $bg-main;
+  }
+
+  &-alt {
+    background-color: $bg-alt;
+  }
+
+  &-accent {
+    background-color: $accent-base;
+  }
+}

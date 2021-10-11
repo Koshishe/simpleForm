@@ -3,7 +3,6 @@ const { merge } = require('webpack-merge');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
-const del = require('del');
 const GlobImporter = require('node-sass-glob-importer');
 const baseWebpackConfig = require('./webpack.base.conf');
 
@@ -13,7 +12,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: 'eval-cheap-source-map',
   devServer: {
     contentBase: [
-      baseWebpackConfig.externals.paths.dist,
+      `${baseWebpackConfig.externals.paths.dist}`,
       `${baseWebpackConfig.externals.paths.src}/templates`,
       `${baseWebpackConfig.externals.paths.src}/data`,
     ],
@@ -24,10 +23,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: 8081,
     progress: true,
     hot: true,
-    index: 'page-list.html',
-    before() {
-      del.sync([baseWebpackConfig.externals.paths.dist]);
-    },
+    index: 'index.html',
   },
   output: {
     publicPath: '/',

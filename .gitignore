@@ -10,6 +10,12 @@ cache
 # Dist folders
 dist
 static
+css
+js
+robots.txt
+index.html
+favicon.ico
+
 
 # VSCode
 .vscode

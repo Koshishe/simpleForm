@@ -1,5 +1,5 @@
 {
-  "name": "simple-workflow",
+  "name": "gateway-config",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -13,7 +13,7 @@
     "url": "https://gitlab.com/Unrelated/simple-workflow.git"
   },
   "keywords": [],
-  "author": "Oleg Bordunov",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/Unrelated/simple-workflow/issues"

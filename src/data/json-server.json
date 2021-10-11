@@ -1,19 +1,13 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
+  "settings": {
+    "region": "RU864_870",
+    "gatewayID": "B827EBFFFE0FBD59",
+    "serverAddr": "192.168.1.244",
+    "portUp": 1700,
+    "portDown": 1700
+  },
+  "versions": {
+    "packetForwarder": "v1.1.1",
+    "gatewayConfig": "v1.1.1"
   }
 }

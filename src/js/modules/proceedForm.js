@@ -10,21 +10,38 @@ export default {
     serverAddr: $('.js-serverAddr'),
     portUP: $('.js-portUP'),
     portDOWN: $('.js-portDOWN'),
+    change: $('.js-change'),
+    save: $('.js-save'),
+    packet: $('.js-packet'),
+    config: $('.js-config'),
+    info: $('.js-info'),
+    message: $('.js-result'),
   },
   error: '.js-error',
   parent: '.gateway-element',
 
-  init() {
+  async init() {
     const self = this;
     const { el } = self;
 
-    el.select.select2();
+    self.setFormData();
+
+    el.select.select2({
+      dropdownParent: $('.gateway-select'),
+    });
+
     Inputmask({ regex: '[A-Fa-f0-9]{16}', placeholder: '' }).mask(el.gateway);
     Inputmask({ mask: '999.999.9.9', placeholder: '0' }).mask(el.serverAddr);
 
     el.gateway.on('input', (e) => self.validateGateway(e.target.value, el.gateway));
     el.portUP.on('input', (e) => self.validatePort(e.target.value, el.portUP));
     el.portDOWN.on('input', (e) => self.validatePort(e.target.value, el.portDOWN));
+
+    el.change.on('click', () => {
+      el.form.find('.gateway-element').removeClass('_disabled');
+      el.change.addClass('_hidden');
+      el.save.removeClass('_hidden');
+    });
 
     el.form.on('submit', (e) => {
       e.preventDefault();
@@ -62,18 +79,96 @@ export default {
     }
   },
 
-  handleSubmit() {
+  async handleSubmit() {
     const self = this;
-    const { error, parent } = self;
-    console.log($(parent));
+    const { error, parent, el } = self;
     $(error).text('');
     $(parent).each((index, value) => {
       $(value).removeClass('_error');
     });
 
-    if (self.validation() > 0) {
-      //
+    if (self.validation() < 1) {
+      await $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3005/settings',
+        success: () => {
+          el.message.text('Изменения успешно сохранены');
+          el.form.find('.gateway-element').addClass('_disabled');
+          el.save.addClass('_hidden');
+          el.change.removeClass('_hidden');
+
+          setTimeout(() => {
+            el.message.text('');
+          }, 1000);
+        },
+      });
     }
+  },
+
+  async handleGetFormData() {
+    let result;
+    await $.ajax({
+      type: 'GET',
+      url: 'http://localhost:3005/settings',
+      success: (res) => {
+        result = res;
+      },
+      error: () => {
+        result = null;
+      },
+    });
+    return result;
+  },
+
+  async handleGetInfoData() {
+    let result;
+    await $.ajax({
+      type: 'GET',
+      url: 'http://localhost:3005/versions',
+      success: (res) => {
+        result = res;
+      },
+      error: () => {
+        result = null;
+      },
+    });
+    return result;
+  },
+
+  fillForm(data) {
+    const self = this;
+    const { el } = self;
+
+    el.select.prop('value', data.region);
+    el.gateway.prop('value', data.gatewayID);
+    el.serverAddr.prop('value', data.serverAddr);
+    el.portUP.prop('value', data.portUp);
+    el.portDOWN.prop('value', data.portDown);
+
+    el.form.find('.gateway-element').addClass('_disabled');
+  },
+
+  async setFormData() {
+    const self = this;
+    const { el } = self;
+    const formData = await self.handleGetFormData();
+    const infoData = await self.handleGetInfoData();
+
+    if (formData) {
+      self.fillForm(formData);
+      el.change.removeClass('_hidden');
+      el.save.addClass('_hidden');
+    }
+
+    if (infoData) {
+      el.info.removeAttr('hidden');
+      el.packet.text(infoData.packetForwarder);
+      el.config.text(infoData.gatewayConfig);
+    }
+
+    el.select.select2({
+      dropdownParent: $('.gateway-select'),
+    });
   },
 
   validation() {
@@ -81,50 +176,49 @@ export default {
     const { el, error, parent } = self;
     let errors = 0;
 
-    if (!el.select.value) {
+    if (!el.select.prop('value')) {
       errors += 1;
       el.select.siblings(error).text('Выберите значение');
       el.select.closest(parent).addClass('_error');
     }
 
-    if (!el.gateway.value) {
+    if (!el.gateway.prop('value')) {
       errors += 1;
       el.gateway.siblings(error).text('Поле обязательно к заполнению');
       el.gateway.closest(parent).addClass('_error');
     }
 
-    if (!el.gateway.value?.match(/^(?=.*[A-Fa-f0-9])[A-Fa-f0-9]{16,}$/g)) {
-      console.log(el.gateway.value?.match(/^(?=.*[A-Fa-f0-9])[A-Fa-f0-9]{16,}$/g));
+    if (!el.gateway.prop('value').match(/^(?=.*[A-Fa-f0-9])[A-Fa-f0-9]{16,}$/g)) {
       errors += 1;
       el.gateway.siblings(error).text('Поле должно содержать 16 символов');
       el.gateway.closest(parent).addClass('_error');
     }
 
-    if (!el.serverAddr.value) {
+    if (!el.serverAddr.prop('value')) {
       errors += 1;
       el.serverAddr.siblings(error).text('Поле обязательно к заполнению');
       el.serverAddr.closest(parent).addClass('_error');
     }
 
-    if (!el.portUP.value) {
+    if (!el.portUP.prop('value')) {
       errors += 1;
       el.portUP.siblings(error).text('Поле обязательно к заполнению');
       el.portUP.closest(parent).addClass('_error');
     }
 
-    if (el.portUP.value || el.portDOWN.value) {
+    if (el.portUP.prop('value') < 0 || el.portUP.prop('value') > 65535) {
       errors += 1;
       el.portUP.siblings(error).text('Значение должно быть не более 65535');
       el.portUP.closest(parent).addClass('_error');
     }
 
-    if (!el.portDOWN.value) {
+    if (!el.portDOWN.prop('value')) {
       errors += 1;
       el.portDOWN.siblings(error).text('Поле обязательно к заполнению');
       el.portDOWN.closest(parent).addClass('_error');
     }
 
-    if (el.portDOWN.value || el.portDOWN.value) {
+    if (el.portDOWN.prop('value') < 0 || el.portDOWN.prop('value') > 65535) {
       errors += 1;
       el.portDOWN.siblings(error).text('Значение должно быть не более 65535');
       el.portDOWN.closest(parent).addClass('_error');

@@ -1,9 +1,16 @@
 <section class="gateway">
     <form class="gateway-form js-form">
         <div class="gateway-title">Gateway Config</div>
+        <div class="gateway-info js-info" hidden>
+            <div>packet-forwarder:
+                <span class="js-packet"></span>
+            </div>
+            <div>gateway-config:
+                <span class="js-config"></span>
+            </div>
+        </div>
         <div class="gateway-element gateway-select">
             <select class="gateway-element-field js-region" name="region" id="region" autocomplete="off">
-                <option selected disabled class="form-select-placeholder"></option>
                 <option value="EU433">EU433</option>
                 <option value="EU863_860">EU863-860</option>
                 <option value="RU864_870">RU864-870</option>
@@ -35,6 +42,8 @@
             <label class="gateway-element-label" for="portDOWN">Server port down</label>
             <div class="gateway-element-error js-error"></div>
         </div>
-        <button type="submit" class="gateway-element-button js-submit">1</button>
+        <button type="button" class="gateway-element-button _hidden js-change">Изменить</button>
+        <button type="submit" class="gateway-element-button js-save">Сохранить изменения</button>
+        <div class="gateway-result-message js-result"></div>
     </form>
 </section>

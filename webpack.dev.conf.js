@@ -54,7 +54,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
               sassOptions: {
                 importer: GlobImporter(),
               },
-              additionalData: '@import "~/scss/base/_includes.scss";',
             },
           },
         ],

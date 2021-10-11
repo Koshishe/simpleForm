@@ -14,7 +14,7 @@ $b: '.gateway';
   }
 
   &-title {
-    font-size: 26px;
+    font-size: 32px;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -135,9 +135,9 @@ $b: '.gateway';
 
     &-label {
       position: absolute;
-      top: -8px;
+      top: -10px;
       left: 10px;
-      font-size: 13px;
+      font-size: 14px;
       background: white;
       padding: 0 7px;
       color: #bdbdbd;
@@ -145,9 +145,9 @@ $b: '.gateway';
 
     &-error {
       position: absolute;
-      bottom: -10px;
+      bottom: -8px;
       left: 10px;
-      font-size: 12px;
+      font-size: 14px;
       color: #d84315;
       background: white;
       padding: 0 7px;
@@ -161,13 +161,32 @@ $b: '.gateway';
       background-color: #00897b;
       color: white;
       transition: 0.3s;
-      
+      font-size: 16px;
+
       &._hidden {
         display: none;
       }
 
       &:hover {
         background-color: #00796b;
+      }
+    }
+  }
+
+  &-result {
+    &-message {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #616161;
+    }
+  }
+
+  &-info {
+    &-item {
+      font-size: 16px;
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
       }
     }
   }

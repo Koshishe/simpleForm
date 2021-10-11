@@ -10,7 +10,7 @@ const packageJSON = require('./package');
 const PATHS = {
   src: path.join(__dirname, './src'),
   static: path.join(__dirname, './src/static'),
-  dist: path.join(__dirname, './dist'),
+  dist: path.join(__dirname, './static'),
   cache: path.join(__dirname, './cache'),
 };
 
@@ -135,7 +135,7 @@ module.exports = {
     }),
     ...PAGES.map((page) => new HtmlWebpackPlugin({
       template: `${PAGES_DIR}/${page}`,
-      filename: `./html/${page.replace(/\.twig/, '.html')}`,
+      filename: `./${page.replace(/\.twig/, '.html')}`,
       scriptLoading: 'blocking',
       minify: false,
       hash: true,

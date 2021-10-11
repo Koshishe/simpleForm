@@ -44,8 +44,16 @@ export default {
     });
 
     el.form.on('submit', (e) => {
+      const data = {
+        region: el.select.prop('value'),
+        gatewayID: el.gateway.prop('value').toUpperCase(),
+        serverAddr: el.serverAddr.prop('value'),
+        portUp: el.portUP.prop('value'),
+        portDown: el.portDOWN.prop('value'),
+      };
+
       e.preventDefault();
-      self.handleSubmit();
+      self.handleSubmit(data);
     });
   },
 
@@ -79,7 +87,7 @@ export default {
     }
   },
 
-  async handleSubmit() {
+  async handleSubmit(data) {
     const self = this;
     const { error, parent, el } = self;
     $(error).text('');
@@ -90,16 +98,23 @@ export default {
     if (self.validation() < 1) {
       await $.ajax({
         type: 'GET',
-        url: 'http://localhost:3005/settings',
+        url: '/api/v1/settings',
+        data,
         success: () => {
-          el.message.text('Изменения успешно сохранены');
+          el.message.text('Изменения успешно сохранены.');
           el.form.find('.gateway-element').addClass('_disabled');
           el.save.addClass('_hidden');
           el.change.removeClass('_hidden');
 
           setTimeout(() => {
             el.message.text('');
-          }, 1000);
+          }, 1200);
+        },
+        error: () => {
+          el.message.text('Что-то пошло не так. Попробуйте ещё раз.');
+          setTimeout(() => {
+            el.message.text('');
+          }, 1200);
         },
       });
     }
@@ -109,7 +124,7 @@ export default {
     let result;
     await $.ajax({
       type: 'GET',
-      url: 'http://localhost:3005/settings',
+      url: '/api/v1/settings',
       success: (res) => {
         result = res;
       },
@@ -124,7 +139,7 @@ export default {
     let result;
     await $.ajax({
       type: 'GET',
-      url: 'http://localhost:3005/versions',
+      url: '/api/v1/versions',
       success: (res) => {
         result = res;
       },

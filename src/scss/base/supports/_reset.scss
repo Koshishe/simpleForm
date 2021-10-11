@@ -110,7 +110,7 @@ html {
 }
 
 * {
-  -webkit-tap-highlight-color: rgba($black-true, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *,
@@ -152,7 +152,7 @@ table {
 label {
   display: block;
   user-select: none;
-  -webkit-tap-highlight-color: rgba($black-true, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 input,
@@ -193,7 +193,7 @@ button {
 
 button,
 input {
-  -webkit-tap-highlight-color: rgba($black-true, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 button:focus,
@@ -221,7 +221,7 @@ select {
 
   &:-moz-focusring {
     color: transparent;
-    text-shadow: 0 0 0 $black-true;
+    text-shadow: 0 0 0 #000;
   }
 }
 
@@ -233,7 +233,7 @@ acronym[title] {
 a {
   color: inherit;
   outline: none;
-  -webkit-tap-highlight-color: rgba($black-true, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   text-decoration: none;
 }
 
@@ -264,7 +264,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: 0;
-  -webkit-text-fill-color: $white-true;
+  -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(0, 174, 255, 0.04) 50%, rgba(255, 255, 255, 0) 51%, rgba(0, 174, 255, 0.03) 100%);

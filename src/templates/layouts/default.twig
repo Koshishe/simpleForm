@@ -1,16 +1,75 @@
-{% import "includes/_includes.twig" as inc %}
 <!DOCTYPE html>
-<html lang="ru"{% if pageClass %} class="{{ pageClass }}"{% endif %}>
-{% include 'modules/head.twig' %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title>Gateway Config</title>
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <meta property="og:title" content="Gateway Config">
+</head>
 <body>
 <div class="l-page">
-    {% include "modules/site-preloader.twig" %}
     <div class="l-page-layout">
-        {% include "modules/site-header.twig" %}
         <main class="l-main">
-            {% block content %}{% endblock %}
+            <section class="gateway">
+                <form class="gateway-form js-form">
+                    <div class="gateway-title">Gateway Config</div>
+                    <div class="gateway-info js-info" hidden>
+                        <div class="gateway-info-item">packet-forwarder:
+                            <span class="js-packet"></span>
+                        </div>
+                        <div class="gateway-info-item">gateway-config:
+                            <span class="js-config"></span>
+                        </div>
+                    </div>
+                    <div class="gateway-element gateway-select">
+                        <select class="gateway-element-field js-region" name="region" id="region" autocomplete="off">
+                            <option value="EU433">EU433</option>
+                            <option value="EU863_860">EU863-860</option>
+                            <option value="RU864_870">RU864-870</option>
+                        </select>
+                        <label class="gateway-element-label" for="region">Regional parameters</label>
+                        <div class="gateway-element-error js-error"></div>
+                    </div>
+                    <div class="gateway-element gateway-input">
+                        <input id="gatewayID" class="gateway-element-field js-gatewayID" placeholder="AAAAAAAAAAAAAAAA" minlength="16" maxlength="16"
+                               name="gatewayID" autocomplete="off"/>
+                        <label class="gateway-element-label" for="gatewayID">GatewayID</label>
+                        <div class="gateway-element-error js-error"></div>
+                    </div>
+                    <div class="gateway-element gateway-input">
+                        <input id="serverAddr" class="gateway-element-field js-serverAddr" placeholder="192.168.0.0"
+                               name="serverAddr" autocomplete="off"/>
+                        <label class="gateway-element-label" for="serverAddr">Server address</label>
+                        <div class="gateway-element-error js-error"></div>
+                    </div>
+                    <div class="gateway-element gateway-input">
+                        <input id="portUP" class="gateway-element-field js-portUP" placeholder="1700" type="number"
+                               name="portUP" autocomplete="off"/>
+                        <label class="gateway-element-label" for="portUP">Server port up</label>
+                        <div class="gateway-element-error js-error"></div>
+                    </div>
+                    <div class="gateway-element gateway-input">
+                        <input id="portDOWN" class="gateway-element-field js-portDOWN" placeholder="1700" type="number"
+                               name="portDOWN" autocomplete="off"/>
+                        <label class="gateway-element-label" for="portDOWN">Server port down</label>
+                        <div class="gateway-element-error js-error"></div>
+                    </div>
+                    <div class="gateway-result-message js-result"></div>
+                    <button type="button" class="gateway-element-button _hidden js-change">Изменить</button>
+                    <button type="submit" class="gateway-element-button js-save">Сохранить изменения</button>
+                </form>
+            </section>
         </main>
-        {% include "modules/site-footer.twig" %}
     </div>
 </div>
 </body>

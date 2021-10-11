@@ -31,7 +31,6 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
                 importer: GlobImporter(),
                 webpackImporter: false,
               },
-              additionalData: '@import "~/scss/base/_includes.scss";',
             },
           },
         ],

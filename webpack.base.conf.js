@@ -3,12 +3,13 @@ const path = require('path');
 const glob = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const packageJSON = require('./package');
 
 const PATHS = {
   src: path.join(__dirname, './src'),
   static: path.join(__dirname, './src/static'),
-  dist: path.join(__dirname, ''),
+  dist: path.join(__dirname, './dist'),
   cache: path.join(__dirname, './cache'),
 };
 
@@ -103,7 +104,16 @@ module.exports = {
     },
   },
   plugins: [
-    new VueLoaderPlugin(),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      templateParameters: {
+        PROJECT_NAME: packageJSON.name,
+        PAGES: PAGES.map((page) => page.replace(/\.twig/, '.html')),
+      },
+      template: `${PATHS.src}/index.ejs`,
+      filename: 'page-list.html',
+      inject: false,
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',

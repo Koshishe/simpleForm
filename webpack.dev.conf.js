@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const ExtraWatchWebpackPlugin = require('extra-watch-webpack-plugin');
+const del = require('del');
 const GlobImporter = require('node-sass-glob-importer');
 const baseWebpackConfig = require('./webpack.base.conf');
 
@@ -24,6 +25,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     progress: true,
     hot: true,
     index: 'index.html',
+    before() {
+      del.sync([baseWebpackConfig.externals.paths.dist]);
+    },
   },
   output: {
     publicPath: '/',
